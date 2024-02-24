@@ -44,6 +44,30 @@ app.post('/submit-form', (req, res) => {
     res.status(200).send('Form data submitted successfully');
   });
 });
+app.get('/employees', (req, res) => {
+    const sql = 'SELECT * FROM employee_details';
+    db.query(sql, (err, results) => {
+      if (err) {
+        res.status(500).send('Error fetching employees');
+        throw err;
+      }
+      res.status(200).json(results);
+    });
+  });
+  app.delete('/employees/:id', (req, res) => {
+    const id = req.params.id;
+  
+    // Delete employee from the database
+    const sql = 'DELETE FROM employee_details WHERE id = ?';
+    db.query(sql, [id], (err, result) => {
+      if (err) {
+        res.status(500).send('Error deleting employee from database');
+        throw err;
+      }
+      console.log(`Employee with id ${id} deleted from database`);
+      res.status(200).send('Employee deleted successfully');
+    });
+  });
 
 // Start the server
 app.listen(port, () => {

@@ -1,6 +1,6 @@
 // FirstForm.js
 import React, { useState } from 'react';
-import './FirstForm.css'
+import './FirstForm.css'; // Import the CSS file
 
 const FirstForm = ({ onNext }) => {
   const [formData, setFormData] = useState({

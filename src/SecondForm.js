@@ -1,9 +1,8 @@
 // SecondForm.js
 import React, { useState } from 'react';
-import './SecondForm.css';
+import './SecondForm.css'; // Import the CSS file
 
-
-const SecondForm = ({ onSubmit }) => {
+const SecondForm = ({ onSubmit, onToggleTable, onBack }) => { // Update props to include onBack function
   const [address, setAddress] = useState('');
   const [bloodGroup, setBloodGroup] = useState('');
 
@@ -18,10 +17,16 @@ const SecondForm = ({ onSubmit }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     onSubmit({ address, bloodGroup });
+    setAddress('');
+    setBloodGroup('');
   };
 
   return (
+    <div>
+      <button className="back-button" onClick={onBack}>Back</button>
     <div className="form-container">
+      {/* Add Back button */}
+
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label>Address:</label>
@@ -35,6 +40,8 @@ const SecondForm = ({ onSubmit }) => {
           <button type="submit">Submit</button>
         </div>
       </form>
+      <button onClick={onToggleTable}>View Employees</button> {/* Add View Employees button */}
+    </div>
     </div>
   );
 };
